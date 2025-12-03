@@ -1,0 +1,378 @@
+[
+{
+  "model": "api.categoria",
+  "pk": 9,
+  "fields": {
+    "nombre": "Hamburguesas",
+    "descripcion": "Hamburguesas clásicas y gourmet"
+  }
+},
+{
+  "model": "api.categoria",
+  "pk": 10,
+  "fields": {
+    "nombre": "Pizzas",
+    "descripcion": "Pizzas artesanales con ingredientes frescos"
+  }
+},
+{
+  "model": "api.categoria",
+  "pk": 11,
+  "fields": {
+    "nombre": "Empanadas",
+    "descripcion": "Empanadas caseras rellenas"
+  }
+},
+{
+  "model": "api.categoria",
+  "pk": 12,
+  "fields": {
+    "nombre": "Parrilla",
+    "descripcion": "Carnes a la parrilla y choripán"
+  }
+},
+{
+  "model": "api.categoria",
+  "pk": 13,
+  "fields": {
+    "nombre": "Pastas",
+    "descripcion": "Pastas frescas y salsas caseras"
+  }
+},
+{
+  "model": "api.categoria",
+  "pk": 14,
+  "fields": {
+    "nombre": "Ensaladas",
+    "descripcion": "Ensaladas frescas y saludables"
+  }
+},
+{
+  "model": "api.categoria",
+  "pk": 15,
+  "fields": {
+    "nombre": "Bebidas",
+    "descripcion": "Bebidas frías y calientes"
+  }
+},
+{
+  "model": "api.categoria",
+  "pk": 16,
+  "fields": {
+    "nombre": "Postres",
+    "descripcion": "Postres caseros y helados"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 26,
+  "fields": {
+    "nombre": "Hamburguesa Clásica",
+    "descripcion": "",
+    "precio": "2500.00",
+    "categoria": 9,
+    "stock": 9,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.400Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 27,
+  "fields": {
+    "nombre": "Hamburguesa Completa",
+    "descripcion": "",
+    "precio": "3200.00",
+    "categoria": 9,
+    "stock": 11,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.405Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 29,
+  "fields": {
+    "nombre": "Pizza Margherita",
+    "descripcion": "",
+    "precio": "3200.00",
+    "categoria": 10,
+    "stock": 7,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.418Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 30,
+  "fields": {
+    "nombre": "Pizza Napolitana",
+    "descripcion": "",
+    "precio": "3800.00",
+    "categoria": 10,
+    "stock": 6,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.424Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 31,
+  "fields": {
+    "nombre": "Pizza Fugazzeta",
+    "descripcion": "",
+    "precio": "4200.00",
+    "categoria": 10,
+    "stock": 5,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.430Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 32,
+  "fields": {
+    "nombre": "Empanadas de Carne",
+    "descripcion": "",
+    "precio": "180.00",
+    "categoria": 11,
+    "stock": 50,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.437Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 33,
+  "fields": {
+    "nombre": "Empanadas de Pollo",
+    "descripcion": "",
+    "precio": "180.00",
+    "categoria": 11,
+    "stock": 40,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.442Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 34,
+  "fields": {
+    "nombre": "Empanadas de Jamón y Queso",
+    "descripcion": "",
+    "precio": "180.00",
+    "categoria": 11,
+    "stock": 30,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.446Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 35,
+  "fields": {
+    "nombre": "Empanadas de Humita",
+    "descripcion": "",
+    "precio": "200.00",
+    "categoria": 11,
+    "stock": 25,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.451Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 36,
+  "fields": {
+    "nombre": "Lomito",
+    "descripcion": "",
+    "precio": "1200.00",
+    "categoria": 12,
+    "stock": 25,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.456Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 37,
+  "fields": {
+    "nombre": "Bife de Chorizo",
+    "descripcion": "",
+    "precio": "4500.00",
+    "categoria": 12,
+    "stock": 8,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.461Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 38,
+  "fields": {
+    "nombre": "Costillas BBQ",
+    "descripcion": "",
+    "precio": "3800.00",
+    "categoria": 12,
+    "stock": 10,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.465Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 39,
+  "fields": {
+    "nombre": "Lomito Completo",
+    "descripcion": "",
+    "precio": "3500.00",
+    "categoria": 13,
+    "stock": 12,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.470Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 40,
+  "fields": {
+    "nombre": "Ñoquis con Salsa",
+    "descripcion": "",
+    "precio": "2800.00",
+    "categoria": 13,
+    "stock": 15,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.474Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 41,
+  "fields": {
+    "nombre": "Ravioles de Ricota",
+    "descripcion": "",
+    "precio": "3200.00",
+    "categoria": 13,
+    "stock": 10,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.479Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 42,
+  "fields": {
+    "nombre": "Ensalada César",
+    "descripcion": "",
+    "precio": "1800.00",
+    "categoria": 14,
+    "stock": 18,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.483Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 43,
+  "fields": {
+    "nombre": "Ensalada Mixta",
+    "descripcion": "",
+    "precio": "1500.00",
+    "categoria": 14,
+    "stock": 20,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.488Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 44,
+  "fields": {
+    "nombre": "Coca Cola 500ml",
+    "descripcion": "",
+    "precio": "300.00",
+    "categoria": 15,
+    "stock": 60,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.493Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 45,
+  "fields": {
+    "nombre": "Agua Mineral 500ml",
+    "descripcion": "",
+    "precio": "200.00",
+    "categoria": 15,
+    "stock": 80,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.498Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 46,
+  "fields": {
+    "nombre": "Cerveza Quilmes",
+    "descripcion": "",
+    "precio": "400.00",
+    "categoria": 15,
+    "stock": 45,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.503Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 47,
+  "fields": {
+    "nombre": "Jugo Natural",
+    "descripcion": "",
+    "precio": "350.00",
+    "categoria": 15,
+    "stock": 30,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.507Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 48,
+  "fields": {
+    "nombre": "Flan Casero",
+    "descripcion": "",
+    "precio": "800.00",
+    "categoria": 16,
+    "stock": 15,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.511Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 49,
+  "fields": {
+    "nombre": "Helado 1/4kg",
+    "descripcion": "",
+    "precio": "1200.00",
+    "categoria": 16,
+    "stock": 20,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.515Z"
+  }
+},
+{
+  "model": "api.producto",
+  "pk": 50,
+  "fields": {
+    "nombre": "Tiramisu",
+    "descripcion": "",
+    "precio": "950.00",
+    "categoria": 16,
+    "stock": 12,
+    "disponible": true,
+    "created_at": "2025-11-15T16:37:10.520Z"
+  }
+}
+]
