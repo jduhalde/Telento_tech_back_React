@@ -165,9 +165,17 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # CORS & CSRF
 # ---------------------------
 
-# Permitir todos los orígenes para evitar problemas iniciales de despliegue
-CORS_ALLOW_ALL_ORIGINS = True 
+# ---------------------------
+# CORS & CSRF (Configuración Blindada)
+# ---------------------------
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+
+# Aquí ponemos TU dominio de Vercel explícitamente
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:5173',
+    'https://telento-tech-front-react.vercel.app', 
+]
 
 # Orígenes confiables para CSRF (importante para POST/PUT/DELETE)
 CSRF_TRUSTED_ORIGINS = [
