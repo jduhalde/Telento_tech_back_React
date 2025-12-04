@@ -1,0 +1,18 @@
+web: python manage.py migrate && gunicorn comida_al_paso.wsgi --log-file -
+### 2. Limpiar Railway (Importante)
+
+Antes de subirlo, asegúrate de que Railway esté limpio para que lea este archivo y no se confunda:
+
+1.  Ve a **Settings** en Railway.
+2.  **Borra** el "Custom Start Command" (déjalo vacío).
+3.  Ve a **Variables**.
+4.  Si existe `PORT`, **bórrala**.
+
+### 3. Subir y Desplegar 🚀
+
+Ahora sí, envía este "manual de instrucciones" a la nube. En tu terminal del Backend:
+
+```powershell
+git add .
+git commit -m "Agregando Procfile para Railway"
+git push
