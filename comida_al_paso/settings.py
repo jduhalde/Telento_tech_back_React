@@ -2,6 +2,7 @@ from pathlib import Path
 import os
 from datetime import timedelta
 from dotenv import load_dotenv
+import dj_database_url  # NUEVO IMPORT
 
 # Cargar variables de entorno desde .env si existe
 load_dotenv()
@@ -9,17 +10,17 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv(
-    'SECRET_KEY', 'django-insecure-change-this-in-production')
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-change-this-in-production')
 
 # Environment
 ENV = os.getenv('ENV', 'development').lower()
 
-# DEBUG: Por defecto False en producción
-DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 'yes')
+# DEBUG: False por defecto si estamos en Render
+# Render define automáticamente la variable 'RENDER', usaremos eso para desactivar debug
+DEBUG = 'RENDER' not in os.environ
 
-# ALLOWED_HOSTS: Permite todo temporalmente para facilitar despliegue
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS
+ALLOWED_HOSTS = ['*'] # Se puede restringir luego a ['.onrender.com']
 
 # Apps instaladas
 INSTALLED_APPS = [
@@ -74,64 +75,27 @@ TEMPLATES = [
 WSGI_APPLICATION = 'comida_al_paso.wsgi.application'
 
 # ---------------------------
-# BASE DE DATOS
+# BASE DE DATOS (MODIFICADO PARA RENDER)
 # ---------------------------
 
-DB_ENGINE = os.getenv('DB_ENGINE', 'sqlite').lower()
-
-if 'postgres' in DB_ENGINE:
-    # PostgreSQL (Docker / Producción en Railway)
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('POSTGRES_DB', 'comidadb'),
-            'USER': os.getenv('POSTGRES_USER', 'postgres'),
-            'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'postgres'),
-            'HOST': os.getenv('POSTGRES_HOST', 'db'),
-            'PORT': os.getenv('POSTGRES_PORT', '5432'),
-        }
-    }
-elif 'mysql' in DB_ENGINE:
-    # MySQL (Railway u otro)
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.getenv('MYSQLDATABASE', 'railway'),
-            'USER': os.getenv('MYSQLUSER', 'root'),
-            'PASSWORD': os.getenv('MYSQLPASSWORD', ''),
-            'HOST': os.getenv('MYSQLHOST', 'localhost'),
-            'PORT': os.getenv('MYSQLPORT', '3306'),
-            'OPTIONS': {
-                'charset': 'utf8mb4',
-            },
-        }
-    }
-else:
-    # SQLite (desarrollo local)
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+DATABASES = {
+    'default': dj_database_url.config(
+        # Busca automáticamente la variable DATABASE_URL (Render)
+        # Si no la encuentra, usa SQLite localmente
+        default='sqlite:///db.sqlite3',
+        conn_max_age=600
+    )
+}
 
 # ---------------------------
 # Validación de contraseñas
 # ---------------------------
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    { 'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator', },
+    { 'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator', },
+    { 'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator', },
+    { 'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', },
 ]
 
 # ---------------------------
@@ -149,9 +113,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-# Configuración de WhiteNoise para producción
-# Permite servir archivos estáticos comprimidos y cacheados
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # ---------------------------
@@ -162,27 +123,17 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # ---------------------------
-# CORS & CSRF
+# CORS & CSRF (Configuración Lista para Despliegue)
 # ---------------------------
 
-# ---------------------------
-# CORS & CSRF (Configuración Blindada)
-# ---------------------------
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True # Permitimos acceso global inicialmente para evitar bloqueos
 CORS_ALLOW_CREDENTIALS = True
 
-# Aquí ponemos TU dominio de Vercel explícitamente
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:5173',
-    'https://telento-tech-front-react.vercel.app', 
-]
-
-# Orígenes confiables para CSRF (importante para POST/PUT/DELETE)
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
-    'https://*.railway.app', 
-    'https://*.vercel.app',
+    'https://*.onrender.com', # Backend Render
+    'https://*.netlify.app',  # Frontend Netlify
 ]
 
 # ---------------------------
@@ -203,10 +154,6 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(minutes=int(os.getenv('JWT_REFRESH_TOKEN_LIFETIME', '1440'))),
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
-
-# ---------------------------
-# Auto primary key
-# ---------------------------
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -246,8 +193,7 @@ LOGGING = {
 # ---------------------------
 
 if not DEBUG:
-    # Forzar HTTPS en producción
-    SECURE_SSL_REDIRECT = os.getenv('SECURE_SSL_REDIRECT', 'False').lower() in ('true', '1', 'yes')
+    SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
