@@ -21,4 +21,16 @@ else:
     print('✅ Superusuario ya existe')
 END
 
+echo "📦 Cargando datos iniciales si no existen..."
+python manage.py shell << END
+from api.models import Producto
+if Producto.objects.count() == 0:
+    from django.core.management import call_command
+    call_command('loaddata', 'fixtures/initial_data.json')
+    call_command('loaddata', 'fixtures/productos_inicial.json')
+    print('✅ Datos iniciales cargados')
+else:
+    print('✅ Ya existen productos en la base de datos')
+END
+
 echo "✅ Build completado!"
