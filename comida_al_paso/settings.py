@@ -132,8 +132,8 @@ CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
-    'https://*.onrender.com', # Backend Render
-    'https://*.netlify.app',  # Frontend Netlify
+    'https://*.onrender.com',
+    'https://*.vercel.app',  # ← Frontend Vercel
 ]
 
 # ---------------------------
