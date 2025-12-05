@@ -72,9 +72,27 @@ class StandardPagination(PageNumberPagination):
 @permission_classes([AllowAny])
 def listar_productos(request):
     """
-    Listar todos los productos (público)
+    Listar todos los productos con filtros opcionales (público)
     """
     productos = Producto.objects.all()
+    
+    # Filtro por búsqueda (nombre o descripción)
+    search = request.query_params.get('search', None)
+    if search:
+        productos = productos.filter(
+            nombre__icontains=search
+        ) | productos.filter(
+            descripcion__icontains=search
+        )
+    
+    # Filtro por categoría
+    categoria = request.query_params.get('categoria', None)
+    if categoria:
+        productos = productos.filter(categoria_id=categoria)
+    
+    # Ordenar por nombre
+    productos = productos.order_by('nombre')
+    
     paginator = StandardPagination()
     paginated = paginator.paginate_queryset(productos, request)
     serializer = ProductoSerializer(paginated, many=True)
