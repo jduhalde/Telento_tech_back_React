@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.pagination import PageNumberPagination
 from django.contrib.auth.models import User
+from django.db.models import Q
 from .models import Producto, Categoria
 from .serializers import ProductoSerializer, CategoriaSerializer
 from .permissions import IsAdminUser
@@ -80,9 +81,7 @@ def listar_productos(request):
     search = request.query_params.get('search', None)
     if search:
         productos = productos.filter(
-            nombre__icontains=search
-        ) | productos.filter(
-            descripcion__icontains=search
+            Q(nombre__icontains=search) | Q(descripcion__icontains=search)
         )
     
     # Filtro por categoría
